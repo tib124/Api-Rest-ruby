@@ -1,10 +1,7 @@
 class PostsController < ApplicationController
-    
-
-
     def create
-        #Find User
-        #Create post with User
+       # Find User
+       # Create post with User
        if post = @user.posts.create(post_params)
             render json: post.as_json
        else
@@ -15,6 +12,6 @@ class PostsController < ApplicationController
 
     private
     def post_params
-        params.require(:post).permit(:caption,:image_url,:body)
+        params.require(:post).permit(:caption, :image_url, :body)
     end
 end
