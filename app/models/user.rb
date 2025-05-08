@@ -12,11 +12,17 @@ class User < ApplicationRecord
     # Callback para garantir que o email esteja em formato adequado
     before_save :downcase_email
   
+    def as_json(opts = {})
+        super(opts.merge(only:[:id,:first_name,:last_name]))
+    end
+
     private
   
     # Método para deixar o email em minúsculo antes de salvar
     def downcase_email
       self.email = email.downcase
     end
+    
+
   end
   

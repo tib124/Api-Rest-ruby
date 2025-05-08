@@ -9,7 +9,9 @@ class UsersController < ApplicationController
     end
   end
 
-  
+  def index
+    render json:{users: User.all.map(&:as_json)}
+  end
   private
 
   def user_params
