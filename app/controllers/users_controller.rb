@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :authenticate # Permite criar usuários sem autenticaçã
   def create
     @user = User.new(user_params)  # Cria a instância sem salvar no banco de dados ainda
     
@@ -15,6 +16,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :first_name, :last_name)
+    params.require(:user).permit(:email, :password, :first_name, :last_name,:username)
   end
 end

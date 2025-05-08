@@ -1,11 +1,12 @@
 class User < ApplicationRecord
     # Adiciona a validação de presença para os campos necessários
     validates :email, presence: true, uniqueness: true
+    validates :username, presence: true, uniqueness: true
     validates :first_name, presence: true
     validates :last_name, presence: true
     validates :password, presence: true, length: { minimum: 6 }, on: :create
-  
-    # Usando has_secure_password para lidar com a autenticação
+    
+    has_many :posts 
     # Isso irá automaticamente adicionar métodos de senha e validações
     has_secure_password
   
@@ -13,7 +14,7 @@ class User < ApplicationRecord
     before_save :downcase_email
   
     def as_json(opts = {})
-        super(opts.merge(only:[:id,:first_name,:last_name]))
+        super(opts.merge(only:[:id,:first_name,:last_name,:username]))
     end
 
     private
